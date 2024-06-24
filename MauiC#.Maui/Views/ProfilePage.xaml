@@ -1,41 +1,118 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiC_.Maui.Components"
              x:Class="MauiC_.Maui.Views.ProfilePage"
-             Title="ProfilePage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="ProfileImageStyle" TargetType="Image">
-                <Setter Property="WidthRequest" Value="120" />
-                <Setter Property="HeightRequest" Value="120" />
-                <Setter Property="Aspect" Value="AspectFill" />
-                <Setter Property="Margin" Value="0, 20, 0, 10" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
+             Shell.NavBarIsVisible="False"
+             Title="ProfilePage"
+             BackgroundColor="#f0f0f5">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="20">
+                <Frame BackgroundColor="#ffffff" 
+                       CornerRadius="15" 
+                       HasShadow="True" 
+                       Margin="0,10,0,0">
+                    <StackLayout Padding="15">
+                        <Frame BackgroundColor="#ffffff" 
+                               CornerRadius="15" 
+                               HeightRequest="200"
+                               WidthRequest="200"
+                               HasShadow="True" 
+                               Margin="0,10,0,0">
+                            <Image Source="dotnet_bot.svg" 
+                               Aspect="AspectFill"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Margin="0,20,0,0"/>
+                        </Frame>
+                        <Label Text="Имя пользователя" 
+                               FontAttributes="Bold" 
+                               FontSize="Large" 
+                               HorizontalOptions="Center" 
+                               TextColor="#333333"/>
+                        <Label Text="Иван Иванов" 
+                               FontSize="Medium" 
+                               HorizontalOptions="Center" 
+                               TextColor="#666666"/>
+                        <Label Text="qwe@gmail.com" 
+                                FontSize="Medium" 
+                                HorizontalOptions="Center" 
+                                TextColor="#666666"/>
+                    </StackLayout>
+                </Frame>
 
-            </Style>
+                <Frame BackgroundColor="#ffffff" 
+                       CornerRadius="15" 
+                       HasShadow="True" 
+                       Margin="0,10,0,0">
+                    <StackLayout Padding="15">
+                        <Label Text="Количество просмотренных достопримечательностей" 
+                               FontAttributes="Bold" 
+                               FontSize="Medium" 
+                               HorizontalOptions="Center" 
+                               TextColor="#333333"/>
+                        <Label x:Name="AttractionsCountLabel" 
+                               Text="42" 
+                               FontSize="Large" 
+                               HorizontalOptions="Center" 
+                               TextColor="#4caf50"/>
+                    </StackLayout>
+                </Frame>
 
-            <Style x:Key="ProfileNameStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="24" />
-                <Setter Property="TextColor" Value="#000000" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="Margin" Value="0, 0, 0, 10" />
-            </Style>
+                <Frame BackgroundColor="#ffffff" 
+                       CornerRadius="15" 
+                       HasShadow="True" 
+                       Margin="0,10,0,0">
+                    <StackLayout Padding="15">
+                        <Label Text="Текущий уровень" 
+                               FontAttributes="Bold" 
+                               FontSize="Medium" 
+                               HorizontalOptions="Center" 
+                               TextColor="#333333"/>
+                        <Label x:Name="CurrentLevelLabel" 
+                               Text="5" 
+                               FontSize="Large" 
+                               HorizontalOptions="Center" 
+                               TextColor="#4caf50"/>
+                        <ProgressBar x:Name="LevelProgressBar" 
+                                     Progress="0.65" 
+                                     HeightRequest="10" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     Margin="0,10,0,0"
+                                     ProgressColor="#4caf50" />
+                        <Label x:Name="NextLevelLabel" 
+                               Text="До следующего уровня: 35%" 
+                               FontSize="Small" 
+                               HorizontalOptions="Center" 
+                               TextColor="#999999"/>
+                    </StackLayout>
+                </Frame>
 
-            <Style x:Key="ProfileDescriptionStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="TextColor" Value="#808080" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="Margin" Value="0, 0, 0, 20" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+                <Frame BackgroundColor="#ffffff" 
+                       CornerRadius="15" 
+                       HasShadow="True" 
+                       Margin="0,10,0,0">
+                    <StackLayout Padding="15">
+                        <Label Text="Достижения" 
+                               FontAttributes="Bold" 
+                               FontSize="Medium" 
+                               HorizontalOptions="Center" 
+                               TextColor="#333333"/>
+                        <CollectionView x:Name="AchievementsCollectionView" Margin="0,10,0,0">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="2" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <local:AchievementCard AchievementImageSource="{Binding AchievementImageSource}"
+                                           AchievementTextContent="{Binding AchievementTextContent}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
 
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Image Source="profile_icon.png" Style="{StaticResource ProfileImageStyle}" />
-        <Label Text="John Doe" Style="{StaticResource ProfileNameStyle}" />
-        <Label Text="Software Engineer" Style="{StaticResource ProfileDescriptionStyle}" />
-    </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

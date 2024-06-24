@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiC_.Maui.Components"
              x:Class="MauiC_.Maui.Views.AttractionPage"
              Shell.NavBarIsVisible="False"
              Title="AttractionPage">
     <Grid Margin="15" RowDefinitions=".4*,.1*,.1*,.5*">
+        
         <Border Grid.RowSpan="2">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="20,20,20,20"/>
             </Border.StrokeShape>
             <Grid RowDefinitions=".3*,.7*">
+                
                 <Image Grid.RowSpan="2"
                    Aspect="AspectFill"
                    Source="dvorec_pusl.png"/>
@@ -104,8 +107,24 @@
             <Button Grid.Row="2"
                 BackgroundColor="{StaticResource Brown}"
                 FontFamily="RubikRegular"
-                Text="Посмотреть 3D модель"/>
+                Text="Посмотреть 3D модель"
+                Clicked="Button_Clicked"/>
         </Grid>
 
+    <Frame x:Name="AchievementNotification"
+               BackgroundColor="White"
+               CornerRadius="20"
+               WidthRequest="140"
+               HeightRequest="185"
+               Padding="15"
+               IsVisible="False"
+               Opacity="0"
+               AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1"
+               AbsoluteLayout.LayoutFlags="PositionProportional">
+        <StackLayout>
+            <Image x:Name="AchievementImage" Source="achievement_placeholder.png" HeightRequest="100" />
+            <Label x:Name="AchievementText" Text="Achievement Unlocked!" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" FontAutoScalingEnabled="False" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </Frame>
     </Grid>
 </ContentPage>

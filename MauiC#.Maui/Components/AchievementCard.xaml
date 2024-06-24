@@ -1,0 +1,11 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiC_.Maui.Components.AchievementCard"
+             BackgroundColor="White">
+    <Frame BackgroundColor="#ffffff" CornerRadius="15" HasShadow="True" Margin="10,5" WidthRequest="120" HeightRequest="130">
+        <StackLayout>
+            <Image x:Name="AchievementImage" Source="{Binding AchievementImageSource}" HeightRequest="50" Aspect="AspectFill" HorizontalOptions="Center" Margin="10"/>
+            <Label x:Name="AchievementText" Text="{Binding AchievementTextContent}" FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" TextColor="#333333" Margin="10,5,10,10"/>
+        </StackLayout>
+    </Frame>
+</ContentView>

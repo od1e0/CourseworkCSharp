@@ -67,15 +67,12 @@ namespace MauiC_.Maui.Views
                     _questions.Add(new Question { Text = questionText, Options = options });
                 }
             }
-
-            // ѕеремешиваем список вопросов дл€ случайного пор€дка
             _questions = _questions.OrderBy(x => random.Next()).ToList();
         }
 
         private void LoadQuizState()
         {
             var lastCompletedDate = Preferences.Get("LastCompletedDate", DateTime.MinValue);
-            //_quizCompletedToday = lastCompletedDate.Date == DateTime.Now.Date;
         }
 
         private void SaveQuizState()
@@ -203,7 +200,7 @@ namespace MauiC_.Maui.Views
                 {
                     _currentQuestionIndex++;
                     DisplayCurrentQuestion();
-                    return false; // ¬озвращаем false дл€ однократного выполнени€
+                    return false; 
                 });
             }
         }

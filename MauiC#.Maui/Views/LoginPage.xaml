@@ -7,7 +7,6 @@
              Title="LoginPage">
     <VerticalStackLayout>
 
-        <!--Здесь будет лого-->
         <Frame CornerRadius="50"
            WidthRequest="120"
            HeightRequest="120"

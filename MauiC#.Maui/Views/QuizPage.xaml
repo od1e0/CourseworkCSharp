@@ -69,7 +69,6 @@
                          VerticalOptions="CenterAndExpand"
                          HorizontalOptions="Center"
                          IsVisible="False">
-            <!-- Placeholder for quiz options -->
         </StackLayout>
 
     </Grid>
