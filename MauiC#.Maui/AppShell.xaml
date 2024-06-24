@@ -17,5 +17,7 @@
     <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems" >
         <ShellContent Title="Карта" Icon="map_icon.svg" ContentTemplate="{DataTemplate views:HomePage}"/>
         <ShellContent Title="Викторина" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:QuizPage}"/>
+        <ShellContent Title="Профиль" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:ProfilePage}"/>
+        <ShellContent Title="Настройки" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:SettingsPage}"/>
     </FlyoutItem>
 </Shell>
