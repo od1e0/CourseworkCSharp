@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiC_.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiC_.Maui"
+    xmlns:views="clr-namespace:MauiC_.Maui.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Flyout"/>
+    
+    <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems" >
+        <ShellContent Title="Карта" Icon="map_icon.svg" ContentTemplate="{DataTemplate views:HomePage}"/>
+        <ShellContent Title="Викторина" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:QuizPage}"/>
+    </FlyoutItem>
+</Shell>

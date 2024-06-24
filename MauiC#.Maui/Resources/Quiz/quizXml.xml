@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Quiz>
+	<Question>
+		<Text>Какой замок находится в городе Мир?</Text>
+		<Options>
+			<Option Correct="true">Мирский замок</Option>
+			<Option Correct="false">Несвижский замок</Option>
+			<Option Correct="false">Гольшанский замок</Option>
+			<Option Correct="false">Лидский замок</Option>
+		</Options>
+	</Question>
+	<Question>
+		<Text>Как называется главная площадь Минска?</Text>
+		<Options>
+			<Option Correct="false">Октябрьская площадь</Option>
+			<Option Correct="true">Площадь Независимости</Option>
+			<Option Correct="false">Площадь Победы</Option>
+			<Option Correct="false">Кафедральная площадь</Option>
+		</Options>
+	</Question>
+</Quiz>

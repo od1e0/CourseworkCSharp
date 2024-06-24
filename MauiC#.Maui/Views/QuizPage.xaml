@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiC_.Maui.Views.QuizPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#2196F3">
+
+    <Grid Margin="15"
+          VerticalOptions="FillAndExpand">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="WelcomeLabel"
+               Grid.Row="0"
+               FontSize="24"
+               Padding="30"
+               Text="Добро пожаловать в викторину о Беларуси!"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="White"/>
+
+        <Frame CornerRadius="50"
+               Grid.Row="1"
+               WidthRequest="320"
+               x:Name="image"
+               HeightRequest="320"
+               Margin="0,20,0,0"
+               Padding="0"
+               BorderColor="Green">
+            <Image Source="quiz_image.jpg" WidthRequest="520" HeightRequest="330" VerticalOptions="Center" HorizontalOptions="Center"></Image>
+        </Frame>
+
+        <Button x:Name="StartButton"
+                Grid.Row="3"
+                Text="Начать"
+                Clicked="StartButton_Clicked"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,10,0,0"
+                BackgroundColor="#FFC107"
+                TextColor="White"
+                FontSize="20"
+                Padding="20,10"/>
+
+        <Label x:Name="TimerLabel"
+               Grid.Row="2"
+               FontSize="18"
+               TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="False"/>
+
+        <Label x:Name="QuestionLabel"
+               Grid.Row="0"
+               FontSize="24"
+               TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="False"
+               Margin="30,20,0,20"/>
+
+
+        <StackLayout x:Name="OptionsLayout"
+                     Grid.Row="1"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="Center"
+                         IsVisible="False">
+            <!-- Placeholder for quiz options -->
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

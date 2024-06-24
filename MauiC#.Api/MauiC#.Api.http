@@ -1,0 +1,19 @@
+@MauiC#.Api_HostAddress = https://localhost:7012
+
+
+###
+
+POST {{MauiC#.Api_HostAddress}}/api/user
+Content-Type: application/json
+
+{
+  "name" : "Vova Zditovec",
+  "email" : "vladimir.zdit11@gmail.com",
+  "password" : "123"
+}
+
+###
+
+GET {{MauiC#.Api_HostAddress}}/api/user/login/string/string
+
+###
