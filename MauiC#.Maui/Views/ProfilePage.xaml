@@ -2,9 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MauiC_.Maui.Components"
              x:Class="MauiC_.Maui.Views.ProfilePage"
+             xmlns:vm="clr-namespace:MauiC_.Maui.ViewModels"
              Shell.NavBarIsVisible="False"
              Title="ProfilePage"
              BackgroundColor="#f0f0f5">
+    <ContentPage.BindingContext>
+        <vm:ProfileViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20" Spacing="20">
@@ -19,22 +23,22 @@
                                WidthRequest="200"
                                HasShadow="True" 
                                Margin="0,10,0,0">
-                            <Image Source="dotnet_bot.svg" 
+                            <Image Source="{Binding ProfileImageSource}" 
                                Aspect="AspectFill"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                Margin="0,20,0,0"/>
                         </Frame>
-                        <Label Text="Имя пользователя" 
+                        <Label Text="{Binding Name}"
                                FontAttributes="Bold" 
                                FontSize="Large" 
                                HorizontalOptions="Center" 
                                TextColor="#333333"/>
-                        <Label Text="Иван Иванов" 
+                        <Label Text="{Binding FullName}" 
                                FontSize="Medium" 
                                HorizontalOptions="Center" 
                                TextColor="#666666"/>
-                        <Label Text="qwe@gmail.com" 
+                        <Label Text="{Binding Email}" 
                                 FontSize="Medium" 
                                 HorizontalOptions="Center" 
                                 TextColor="#666666"/>
@@ -52,7 +56,7 @@
                                HorizontalOptions="Center" 
                                TextColor="#333333"/>
                         <Label x:Name="AttractionsCountLabel" 
-                               Text="42" 
+                               Text="{Binding AttractionsCount}" 
                                FontSize="Large" 
                                HorizontalOptions="Center" 
                                TextColor="#4caf50"/>
@@ -70,7 +74,7 @@
                                HorizontalOptions="Center" 
                                TextColor="#333333"/>
                         <Label x:Name="CurrentLevelLabel" 
-                               Text="5" 
+                               Text="{Binding LevelProgress}" 
                                FontSize="Large" 
                                HorizontalOptions="Center" 
                                TextColor="#4caf50"/>
@@ -98,7 +102,7 @@
                                FontSize="Medium" 
                                HorizontalOptions="Center" 
                                TextColor="#333333"/>
-                        <CollectionView x:Name="AchievementsCollectionView" Margin="0,10,0,0">
+                        <CollectionView ItemsSource="{Binding Achievements}" Margin="0,10,0,0">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" Span="2" />
                             </CollectionView.ItemsLayout>

@@ -100,7 +100,7 @@ namespace MauiC_.Maui.Views
         {
             if (_quizCompletedToday)
             {
-                _timer = new System.Timers.Timer(1000);
+                _timer = new System.Timers.Timer(1000); // Таймер на 1 секунду
                 _timer.Elapsed += OnTimerElapsed;
                 _timer.Start();
             }
@@ -109,6 +109,7 @@ namespace MauiC_.Maui.Views
                 StartButton.Text = "Начать викторину!";
             }
         }
+
 
         private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {

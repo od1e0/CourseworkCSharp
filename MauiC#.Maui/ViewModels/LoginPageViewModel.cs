@@ -62,7 +62,6 @@ public partial class LoginPageViewModel : ObservableObject
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error", ex.Message, "Ok");
-            await Shell.Current.GoToAsync(nameof(HomePage));
             return;
         }
     }

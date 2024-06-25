@@ -9,15 +9,15 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate views:ThreeDModelPage}"
+        ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"
         FlyoutItemIsVisible="False"
-        Shell.FlyoutBehavior="Flyout"/>
+        Shell.FlyoutBehavior="Disabled"/>
     
     <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems" >
         <ShellContent Title="Карта" Icon="map_icon.svg" ContentTemplate="{DataTemplate views:HomePage}"/>
         <ShellContent Title="Викторина" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:QuizPage}"/>
-        <ShellContent Title="Профиль" Icon="user.svg" ContentTemplate="{DataTemplate views:ProfilePage}"/>
+        <ShellContent Title="Профиль" Icon="user.svg" ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage"/>
         <ShellContent Title="Настройки" Icon="gear.svg" ContentTemplate="{DataTemplate views:SettingsPage}"/>
     </FlyoutItem>
 </Shell>

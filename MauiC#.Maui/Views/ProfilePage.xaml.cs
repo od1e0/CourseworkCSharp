@@ -10,20 +10,6 @@ namespace MauiC_.Maui.Views
         public ProfilePage()
         {
             InitializeComponent();
-            LoadAchievements();
-            BindingContext = this;
-        }
-
-        private void LoadAchievements()
-        {
-            Achievements = new ObservableCollection<Achievement>
-            {
-                new Achievement { AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "First Visit!" },
-                new Achievement { AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "Explorer!" },
-                new Achievement { AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "Master Traveler!" }
-            };
-
-            AchievementsCollectionView.ItemsSource = Achievements;
         }
     }
 }

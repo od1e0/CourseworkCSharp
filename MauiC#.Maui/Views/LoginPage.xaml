@@ -40,6 +40,7 @@
             <StackLayout Orientation="Horizontal">
                 <Entry Text="{Binding UserName}"
                    WidthRequest="300"
+                       x:Name="username"
                    HeightRequest="50"
                    Margin="10, 0, 0, 0"
                    Placeholder="Email Adress"
@@ -49,6 +50,7 @@
             <StackLayout Orientation="Horizontal" Grid.Row="1">
                 <Entry Text="{Binding Password}"
                    IsPassword="True"
+                       x:Name="password"
                    WidthRequest="300"
                    HeightRequest="50"
                    Margin="10, 0, 0, 0"
@@ -68,6 +70,7 @@
         <Button Command="{Binding LoginCommand}"
             FontAttributes="Bold"
             Text="Войти" CornerRadius="10"
+               Clicked="Button_Clicked"
             FontSize="Large" VerticalOptions="Center"
             Margin="30,0,30,0">
         </Button>

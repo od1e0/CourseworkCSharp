@@ -9,13 +9,17 @@ public class LoginService : ILoginService
     {
         _ = new User();
         var client = new HttpClient();
-        string url = "https://localhost:7012/api/User/login/" + email + "/" + password;
+        string url = "http://courseworkformaui.somee.com/api/User/login/" + email + "/" + password;
         client.BaseAddress = new Uri(url);
         HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
         if (response.IsSuccessStatusCode)
         {
             User user = await response.Content.ReadFromJsonAsync<User>();
             return await Task.FromResult(user!);
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Error", "All fields required", "Ok");
         }
         return null!;
     }
