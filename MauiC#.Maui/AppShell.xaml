@@ -8,12 +8,21 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="Авторизация"
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"
         FlyoutItemIsVisible="False"
         Shell.FlyoutBehavior="Disabled"/>
     
+    <ShellContent
+        Title="Регистрация"
+        ContentTemplate="{DataTemplate views:RegistrationPage}"
+        Route="RegisterPage"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"/>   
+
+    <ShellContent Route="AttractionPage" ContentTemplate="{DataTemplate views:AttractionPage}" />
+
     <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems" >
         <ShellContent Title="Карта" Icon="map_icon.svg" ContentTemplate="{DataTemplate views:HomePage}"/>
         <ShellContent Title="Викторина" Icon="quiz_icon.svg" ContentTemplate="{DataTemplate views:QuizPage}"/>

@@ -15,6 +15,7 @@
                 
                 <Image Grid.RowSpan="2"
                    Aspect="AspectFill"
+                       x:Name="ImageAttractio"
                    Source="dvorec_pusl.png"/>
                 <Grid ColumnDefinitions="*,*">
                     <Frame Margin="15,35,0,0"
@@ -61,10 +62,12 @@
                    FontAttributes="Bold"
                    FontFamily="RubikRegular"
                    FontSize="20"
+                       x:Name="NameAttraction"
                    Text="Дворец Пусловских"
                    TextColor="White"/>
                 <Label Grid.Row="1"
                    Grid.ColumnSpan="2"
+                       x:Name="AdressAttraction"
                    FontFamily="RubikLight"
                    Text="Коссово, Брестская область"
                    TextColor="White"/>
@@ -74,6 +77,7 @@
                        HorizontalOptions="Center"/>
                     <Label FontFamily="RubikRegular"
                        FontAttributes="Bold"
+                           x:Name="ViewsAttraction"
                        FontSize="15"
                        Text="1000"
                        TextColor="{StaticResource White}"
@@ -91,7 +95,7 @@
                    Text="Описание"
                    TextColor="#D9DADA"/>
                 <Label FontSize="14"
-                   LineHeight="1.3">
+                   LineHeight="1.3" x:Name="DescriptionAttraction">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span FontFamily="RubikLight"

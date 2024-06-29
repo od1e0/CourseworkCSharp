@@ -56,4 +56,9 @@ public partial class LoginPage : ContentPage
             return;
         }
     }
+
+    private async void OnRegisterButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//RegisterPage");
+    }
 }

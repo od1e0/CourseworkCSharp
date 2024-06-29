@@ -18,7 +18,7 @@ namespace MauiC_.Maui.Views
         private System.Timers.Timer _timer;
         private int _timeLeft; 
         private DateTime _nextUpdate;
-        private bool _quizCompletedToday = false;
+        private bool _quizCompletedToday;
 
         public QuizPage()
         {
@@ -73,7 +73,9 @@ namespace MauiC_.Maui.Views
         private void LoadQuizState()
         {
             var lastCompletedDate = Preferences.Get("LastCompletedDate", DateTime.MinValue);
+            _quizCompletedToday = lastCompletedDate.Date == DateTime.Now.Date;
         }
+
 
         private void SaveQuizState()
         {
@@ -85,22 +87,16 @@ namespace MauiC_.Maui.Views
         {
             var now = DateTime.Now;
             var moscowTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(now, "Russian Standard Time");
+            var nextUpdate = new DateTime(moscowTime.Year, moscowTime.Month, moscowTime.Day, 0, 0, 0).AddDays(1);
 
-            _nextUpdate = new DateTime(moscowTime.Year, moscowTime.Month, moscowTime.Day, 0, 0, 0).AddDays(1);
-
-            if (moscowTime.Hour >= 0)
-            {
-                _nextUpdate = _nextUpdate.AddDays(1);
-            }
-
-            _timeLeft = (int)(_nextUpdate - moscowTime).TotalSeconds;
+            _timeLeft = (int)(nextUpdate - moscowTime).TotalSeconds;
         }
 
         private void UpdateStartButton()
         {
             if (_quizCompletedToday)
             {
-                _timer = new System.Timers.Timer(1000); // Таймер на 1 секунду
+                _timer = new System.Timers.Timer(1000); 
                 _timer.Elapsed += OnTimerElapsed;
                 _timer.Start();
             }

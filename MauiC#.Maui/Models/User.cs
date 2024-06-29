@@ -9,6 +9,7 @@ public class User
     public string Email { get; set; }
     public string Password { get; set; }
     public string FullName { get; set; }
+    public string PhotoPath { get; set; }
     public double LevelProgress { get; set; }
     public int AttractionsCount { get; set; }
     public ICollection<Achievement> Achievements { get; set; }

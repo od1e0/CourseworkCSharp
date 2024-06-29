@@ -1,44 +1,70 @@
-namespace MauiC_.Maui.Views;
+using MauiC_.Maui.Models;
+using Microsoft.Maui.Controls;
+using System;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Microsoft.Maui.Storage;
 
-public partial class AttractionPage : ContentPage
+namespace MauiC_.Maui.Views
 {
-	public AttractionPage()
-	{
-		InitializeComponent();
-        ShowAchievementIfFirstVisit();
-
-    }
-
-    private async void OnFrameTapped(object sender, EventArgs e)
+    public partial class AttractionPage : ContentPage
     {
-        await Shell.Current.Navigation.PopAsync();
-    }
+        public Attraction Attraction { get; set; }
 
-    private async void ShowAchievementIfFirstVisit()
-    {
-
-        bool isFirstVisit = true;
-
-        if (isFirstVisit)
+        public AttractionPage(Attraction attraction)
         {
-            Preferences.Set("AttractionPageVisited", true);
+            InitializeComponent();
+            Attraction = attraction;
+            ShowAchievementIfFirstVisit();
+        }
 
-            AchievementImage.Source = "achievement_placeholder.png";
-            AchievementText.Text = "Congratulations! You visited your first attraction!";
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (Attraction != null)
+            {
+                NameAttraction.Text = Attraction.Label;
+                AdressAttraction.Text = Attraction.Address;
+                DescriptionAttraction.Text = Attraction.Description;
+                ViewsAttraction.Text = Attraction.Views.ToString();
+                ImageAttractio.Source = Attraction.ImageUrl;
+            }
+            else
+            {
+                DisplayAlert("Ошибка", "Информация не найдена", "Ок");
+            }
+        }
 
-            AchievementNotification.IsVisible = true;
-            await AchievementNotification.FadeTo(1, 2000); 
+        private async void OnFrameTapped(object sender, EventArgs e)
+        {
+            await Shell.Current.Navigation.PopAsync();
+        }
 
-            await Task.Delay(2000);
+        private async void ShowAchievementIfFirstVisit()
+        {
+            bool isFirstVisit = !Preferences.Get("AttractionPageVisited", false);
 
+            if (isFirstVisit)
+            {
+                Preferences.Set("AttractionPageVisited", true);
 
-            await AchievementNotification.FadeTo(0, 1000); 
-            AchievementNotification.IsVisible = false;
+                AchievementImage.Source = "achievement_placeholder.png";
+                AchievementText.Text = "Congratulations! You visited your first attraction!";
+
+                AchievementNotification.IsVisible = true;
+                await AchievementNotification.FadeTo(1, 2000);
+
+                await Task.Delay(2000);
+
+                await AchievementNotification.FadeTo(0, 1000);
+                AchievementNotification.IsVisible = false;
+            }
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ThreeDModelPage());
         }
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new ThreeDModelPage());
-    }
 }

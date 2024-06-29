@@ -38,7 +38,7 @@ namespace MauiC_.Maui.ViewModels
             FullName = user.FullName;
             LevelProgress = user.LevelProgress;
             AttractionsCount = user.AttractionsCount;
-            ProfileImageSource = "dotnet_bot.svg";
+            ProfileImageSource = user.PhotoPath;
             Achievements = new ObservableCollection<Achievement>
             {
                 new Achievement { AchievementId = 1, AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "First Achievement" },

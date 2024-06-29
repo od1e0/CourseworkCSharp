@@ -9,7 +9,7 @@
               InitialCameraUpdate="53.7098, 27.9534, 7, 30, 60"
               VerticalOptions="FillAndExpand" >
 		<maps:Map.Pins>
-			<maps:Pin Address="53.7098, 27.9534" Label="Belarus" Type="Place" Clicked="Pin_Clicked"/>
+			<maps:Pin Address="53.7098, 27.9534" Label="Belarus" Type="Place"/>
 		</maps:Map.Pins>
     </maps:Map>
 </ContentPage>

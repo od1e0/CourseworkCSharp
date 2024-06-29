@@ -80,7 +80,8 @@
                VerticalOptions="Center" TextColor="Blue"
                FontSize="Small"/>
             <Button Text="Зарегистрироваться" FontSize="Small" TextColor="Green" FontAttributes="Bold"
-                BorderWidth="0" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"/>
+                    BorderWidth="0" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"
+                    Clicked="OnRegisterButtonClicked"/>
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
