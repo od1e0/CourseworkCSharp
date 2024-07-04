@@ -1,11 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MauiC_.Maui.Models;
+using MauiC_.Maui.Services;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 
 namespace MauiC_.Maui.ViewModels
 {
     public partial class ProfileViewModel : ObservableObject
     {
+        private readonly IPhotoService _photoService;
+        private readonly HttpClient _httpClient;
+
         [ObservableProperty]
         private string name;
 
@@ -18,19 +23,51 @@ namespace MauiC_.Maui.ViewModels
         [ObservableProperty]
         private string fullName;
 
-        [ObservableProperty]
         private double levelProgress;
+        public double LevelProgress
+        {
+            get => levelProgress;
+            set
+            {
+                if (levelProgress != value)
+                {
+                    levelProgress = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(NextLevelProgress));
+                    OnPropertyChanged(nameof(ProgressBarProgress));
+                }
+            }
+        }
+
+        public string NextLevelProgress => $"До следующего уровня: {100 - (levelProgress-1 % 10) * 10}%";
+        public double ProgressBarProgress => 0.1 + levelProgress / 100.0 * 0.9;
 
         [ObservableProperty]
         private int attractionsCount;
 
         [ObservableProperty]
-        private string profileImageSource;
+        private string _profileImageSource;
+
+        [ObservableProperty]
+        private string _photoBase64;
 
         [ObservableProperty]
         private ObservableCollection<Achievement> achievements;
 
         public ProfileViewModel()
+        {
+            _photoService = new PhotoService();
+            _httpClient = new HttpClient();
+            RefreshProfile();
+            App.EventAggregator.AchievementsUpdated += OnAchievementsUpdated;
+        }
+
+        private async void OnAchievementsUpdated(object sender, EventArgs e)
+        {
+            RefreshProfile();
+        }
+
+        public async void RefreshProfile()
         {
             User user = App.user;
             Name = user.Name;
@@ -38,12 +75,18 @@ namespace MauiC_.Maui.ViewModels
             FullName = user.FullName;
             LevelProgress = user.LevelProgress;
             AttractionsCount = user.AttractionsCount;
-            ProfileImageSource = user.PhotoPath;
-            Achievements = new ObservableCollection<Achievement>
+            try
             {
-                new Achievement { AchievementId = 1, AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "First Achievement" },
-                new Achievement { AchievementId = 2, AchievementImageSource = "achievement_placeholder.png", AchievementTextContent = "Second Achievement" }
-            };
+                var response = await _httpClient.GetAsync($"http://courseworkformaui.somee.com/api/Achievements/user/{user.UserId}");
+
+                response.EnsureSuccessStatusCode(); 
+
+                Achievements = await response.Content.ReadFromJsonAsync<ObservableCollection<Achievement>>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при получении достижений: {ex.Message}");
+            }
         }
     }
 }

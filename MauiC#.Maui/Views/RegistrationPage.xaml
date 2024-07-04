@@ -4,112 +4,191 @@
              x:Class="MauiC_.Maui.Views.RegistrationPage"
              xmlns:viewModel="clr-namespace:MauiC_.Maui.ViewModels"
              x:DataType="viewModel:RegistrationPageViewModel"
-             Title="RegistrationPage">
+             Shell.NavBarIsVisible="False"
+             Title="RegistrationPage"
+             BackgroundColor="White">
+
     <ContentPage.BindingContext>
         <viewModel:RegistrationPageViewModel />
     </ContentPage.BindingContext>
-    <VerticalStackLayout>
 
-        <Frame CornerRadius="50"
-               WidthRequest="120"
-               HeightRequest="120"
-               Margin="0,20,0,0"
-               Padding="0"
-               BorderColor="Green">
-            <Image Source="bel_flag.png" WidthRequest="80" HeightRequest="80" VerticalOptions="Center" HorizontalOptions="Center"></Image>
-        </Frame>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
 
-        <StackLayout Orientation="Vertical" Spacing="10" Margin="0,20,0,0">
-            <Label Text="Регистрация"
-                   FontAttributes="Bold"
-                   FontSize="Large"
-                   TextColor="BlueViolet"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"/>
-            <Label Text="Введите данные для регистрации."
-                   TextColor="LightSkyBlue"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"/>
-        </StackLayout>
-
-        <Grid RowDefinitions="*,*,*,*,*,*" Margin="0, 50, 0, 0"
-              Padding="10" RowSpacing="10"
-              HorizontalOptions="Center">
-            <StackLayout Orientation="Horizontal">
-                <Entry Text="{Binding Name}"
-                       WidthRequest="300"
-                       x:Name="nameEntry"
-                       HeightRequest="50"
-                       Margin="10, 0, 0, 0"
-                       Placeholder="Full Name"
-                       FontAttributes="Bold"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Grid.Row="1">
-                <Entry Text="{Binding Email}"
-                       x:Name="emailEntry"
-                       WidthRequest="300"
-                       HeightRequest="50"
-                       Margin="10, 0, 0, 0"
-                       Placeholder="Email Address"
-                       FontAttributes="Bold"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Grid.Row="2">
-                <Entry Text="{Binding Password}"
-                       IsPassword="True"
-                       x:Name="passwordEntry"
-                       WidthRequest="300"
-                       HeightRequest="50"
-                       Margin="10, 0, 0, 0"
-                       Placeholder="Password"
-                       FontAttributes="Bold"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Grid.Row="3">
-                <Entry Text="{Binding ConfirmPassword}"
-                       IsPassword="True"
-                       x:Name="confirmPasswordEntry"
-                       WidthRequest="300"
-                       HeightRequest="50"
-                       Margin="10, 0, 0, 0"
-                       Placeholder="Confirm Password"
-                       FontAttributes="Bold"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Grid.Row="4">
-                <Button Text="Выбрать фото"
-                        FontAttributes="Bold"
-                        Command="{Binding SelectPhotoCommand}"
-                        VerticalOptions="Center"/>
-                <Label Text="{Binding PhotoPath}" 
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
+            <Frame CornerRadius="50"
+                   WidthRequest="180"
+                   HeightRequest="180"
+                   Margin="0,10,0,0"
+                   Padding="0"
+                   BorderColor="Black"
+                   HasShadow="True">
+                <Image Source="logo.jpg" 
+                       WidthRequest="220" 
+                       HeightRequest="180" 
+                       VerticalOptions="Center" 
                        HorizontalOptions="Center"/>
+            </Frame>
+
+            <StackLayout Orientation="Vertical" Spacing="10" Margin="0,0,0,0">
+                <Label Text="Регистрация"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <Label Text="Введите данные для регистрации."
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="5" Margin="35, 0, 0, 0"
-                         Orientation="Horizontal">
-                <Button Text="Зарегистрироваться"
+            <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="10"
+                   Margin="0, 15, 0, 0"
+                   HasShadow="True"
+                   BorderColor="Black">
+                <StackLayout Spacing="10">
+
+                    <Frame CornerRadius="10"
+                           BorderColor="Black"
+                           Padding="0"
+                           HasShadow="False"
+                           HeightRequest="50">
+                        <Entry Text="{Binding Name}"
+                               x:Name="nameEntry"
+                               HeightRequest="45"
+                               Placeholder="Логин"
+                               FontAttributes="Bold"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               PlaceholderColor="Gray"
+                               Margin="5,0,5,0"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10"
+                           BorderColor="Black"
+                           Padding="0"
+                           HasShadow="False"
+                           HeightRequest="50">
+                        <Entry Text="{Binding FullName}"
+                               x:Name="fullNameEntry"
+                               HeightRequest="45"
+                               Placeholder="Полное имя"
+                               FontAttributes="Bold"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               PlaceholderColor="Gray"
+                               Margin="5,0,5,0"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10"
+                           BorderColor="Black"
+                           Padding="0"
+                           HasShadow="False"
+                           HeightRequest="50"
+                           Grid.Row="1">
+                        <Entry Text="{Binding Email}"
+                               x:Name="emailEntry"
+                               HeightRequest="45"
+                               Placeholder="Email адрес"
+                               FontAttributes="Bold"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               PlaceholderColor="Gray"
+                               Margin="5,0,5,0"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10"
+                           BorderColor="Black"
+                           Padding="0"
+                           HasShadow="False"
+                           HeightRequest="50"
+                           Grid.Row="2">
+                        <Entry Text="{Binding Password}"
+                               IsPassword="True"
+                               x:Name="passwordEntry"
+                               HeightRequest="45"
+                               Placeholder="Пароль"
+                               FontAttributes="Bold"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               PlaceholderColor="Gray"
+                               Margin="5,0,5,0"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10"
+                           BorderColor="Black"
+                           Padding="0"
+                           HasShadow="False"
+                           HeightRequest="50"
+                           Grid.Row="3">
+                        <Entry Text="{Binding ConfirmPassword}"
+                               IsPassword="True"
+                               x:Name="confirmPasswordEntry"
+                               HeightRequest="45"
+                               Placeholder="Подтверждение пароля"
+                               FontAttributes="Bold"
+                               BackgroundColor="White"
+                               TextColor="Black"
+                               PlaceholderColor="Gray"
+                               Margin="5,0,5,0"/>
+                    </Frame>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="4" Margin="10, 0, 10, 0">
+                        <Button Text="Выбрать фото"
+                                FontAttributes="Bold"
+                                Command="{Binding SelectPhotoCommand}"
+                                VerticalOptions="Center"
+                                BackgroundColor="#512BD4"
+                                TextColor="White"/>
+                        <Label Text="{Binding PhotoPath}" 
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               TextColor="Black"/>
+                    </StackLayout>
+                    <Label Text="{Binding ErrorText}"
+                           TextColor="Red"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           IsVisible="{Binding IsErrorVisible}" />
+
+                    <Button Text="Зарегистрироваться"
+                            FontAttributes="Bold"
+                            Command="{Binding RegisterCommand}"
+                            CornerRadius="10"
+                            WidthRequest="250"
+                            FontSize="Large"
+                            VerticalOptions="Center"
+                            BackgroundColor="Black"
+                            TextColor="White"
+                            Margin="30,0,30,0"/>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Уже зарегистрированы?" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" 
+                       TextColor="Black"
+                       FontSize="Small"/>
+                <Button Text="Войти" 
+                        x:Name="LoginButton"
+                        Clicked="LoginButton_Clicked"
+                        FontSize="Small" 
+                        TextColor="Green" 
                         FontAttributes="Bold"
-                        Command="{Binding RegisterCommand}"
-                        CornerRadius="10"
-                        FontSize="Large"
-                        VerticalOptions="Center"/>
+                        BorderWidth="0" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" 
+                        BackgroundColor="Transparent"/>
             </StackLayout>
-        </Grid>
-
-        <StackLayout Margin="0,35,0,0" Orientation="Horizontal" HorizontalOptions="Center">
-            <Label Text="Уже зарегистрированы?" HorizontalOptions="Center"
-                   VerticalOptions="Center" TextColor="Blue"
-                   FontSize="Small"/>
-            <Button Text="Войти" FontSize="Small" TextColor="Green" FontAttributes="Bold"
-                    BorderWidth="0" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"/>
         </StackLayout>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

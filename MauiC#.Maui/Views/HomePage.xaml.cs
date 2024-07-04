@@ -68,7 +68,6 @@ namespace MauiC_.Maui.Views
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Navigation error: {ex.Message}", "OK");
-                System.Diagnostics.Debug.WriteLine($"Exception: {ex}");
             }
         }
     }

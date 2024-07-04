@@ -8,6 +8,7 @@ namespace MauiC_.Maui.Models
 {
     public class Attraction
     {
+        public int Id { get; set; }
         public string Label { get; set; }
         public string Address { get; set; }
         public double Latitude { get; set; }
@@ -16,5 +17,10 @@ namespace MauiC_.Maui.Models
         public string ImageUrl { get; set; }
         public int Views { get; set; }
         public string ThreeModelUrl { get; set; }
+
+        public void IncrementViews()
+        {
+            Views++;
+        }
     }
 }

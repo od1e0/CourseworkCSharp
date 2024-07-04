@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdminMap.Views.QuizCreatorPage"
+             Shell.NavBarIsVisible="False"
+             Title="QuizCreatorPage"
+             Background="#c5e079">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Конструктор Тестов" 
+                   FontSize="24" 
+                   HorizontalOptions="Center" 
+                   TextColor="{StaticResource PrimaryGreen}" 
+                   FontAttributes="Bold" />
+
+            <ListView x:Name="QuizListView" 
+                      ItemSelected="OnQuizSelected" 
+                      Style="{StaticResource CustomListView}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding FileName}" 
+                                       VerticalOptions="Center"
+                                       Grid.Column="0"
+                                       TextColor="{StaticResource PrimaryGreen}"
+                                       FontAttributes="Bold"
+                                       FontSize="18" />
+
+                                <Button Text="Удалить" 
+                                        Clicked="OnDeleteQuizClicked" 
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End" 
+                                        Grid.Column="1"
+                                        Margin="0,0,0,1"
+                                        HeightRequest="37"
+                                        CommandParameter="{Binding FilePath}" 
+                                        Style="{StaticResource DeleteButton}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Добавить новый тест" Clicked="OnAddNewQuizClicked" Style="{StaticResource PrimaryButton}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

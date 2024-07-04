@@ -4,11 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AdminMap"
+    xmlns:views="clr-namespace:AdminMap.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
 
+    <FlyoutItem Route="AdminPage" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Достопримечательности" Icon="attraction.svg" ContentTemplate="{DataTemplate views:AdminPage}"/>
+        <ShellContent Title="Викторины" Icon="quiz.svg" ContentTemplate="{DataTemplate views:QuizCreatorPage}"/>
+    </FlyoutItem>
 </Shell>

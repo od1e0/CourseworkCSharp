@@ -1,3 +1,5 @@
+using MauiC_.Maui.ViewModels;
+
 namespace MauiC_.Maui.Views;
 
 public partial class SettingsPage : ContentPage
@@ -5,14 +7,15 @@ public partial class SettingsPage : ContentPage
 	public SettingsPage()
 	{
 		InitializeComponent();
+        BindingContext = new SettingsViewModel();
 	}
 
     private async void PrivacyAlert(object sender, EventArgs e)
     {
-        await Shell.Current.DisplayAlert(
-            "Our Privacy Policy",
-            "We take the utmost care to ensure that GDPR laws are followed.",
-            "I understand");
+        await DisplayAlert(
+            "Ќаша политика конфиденциальности",
+            "ћы прилагаем все усили€, чтобы обеспечить соблюдение законов GDPR.",
+            "я понимаю");
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

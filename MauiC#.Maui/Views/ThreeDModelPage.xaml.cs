@@ -1,10 +1,11 @@
+using MauiC_.Maui.Models;
 using System.Reflection;
 
 namespace MauiC_.Maui.Views;
 
 public partial class ThreeDModelPage : ContentPage
 {
-	public ThreeDModelPage()
+	public ThreeDModelPage(Attraction attraction)
 	{
 		InitializeComponent();
 
@@ -20,6 +21,6 @@ public partial class ThreeDModelPage : ContentPage
             Children = { webView }
         };
 
-        webView.Source = new Uri("https://sketchfab.com/3d-models/732a39cfbe404265be7616618ce0272c");
+        webView.Source = new Uri($"{attraction.ThreeModelUrl}");
     }
 }

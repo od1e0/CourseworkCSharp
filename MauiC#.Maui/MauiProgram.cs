@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Maui.GoogleMaps.Hosting;
+using MauiC_.Maui.Services;
+using MauiC_.Maui.ViewModels;
 
 
 namespace MauiC_.Maui
@@ -20,8 +22,14 @@ namespace MauiC_.Maui
                     fonts.AddFont("Rubik-Regular.ttf", "RubikRegular");
                 });
 
+            builder.Services.AddSingleton<IUserService, UserService>();
+            builder.Services.AddSingleton<ImageService>();
+            builder.Services.AddSingleton<ProfileViewModel>();
+
+            builder.Services.AddTransient<SettingsViewModel>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 #if ANDROID
         builder.UseGoogleMaps();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdminMap.Views.AdminPage"
+             Shell.NavBarIsVisible="False"
+             Title="AdminPage"
+             BackgroundColor="#c5e079">
+
+    <StackLayout Padding="20">
+        <Label Text="Достопримечательности" 
+               FontSize="24"
+               HorizontalOptions="Center" 
+               TextColor="{StaticResource PrimaryGreen}" 
+               FontAttributes="Bold" />
+        <ListView x:Name="AttractionsListView"
+                  Style="{StaticResource CustomListView}"
+                  ItemsSource="{Binding Attractions}"
+                  ItemSelected="OnAttractionSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Label}" TextColor="Black"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Добавить новую достопримечательность"
+        Style="{StaticResource PrimaryButton}"
+        Clicked="OnAddAttractionClicked"/>
+    </StackLayout>
+</ContentPage>

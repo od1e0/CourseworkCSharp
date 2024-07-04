@@ -12,13 +12,13 @@ namespace MauiC_.Maui.Services
     {
         private readonly HttpClient _httpClient = new HttpClient();
 
-        public async Task<User> Login(string email, string password)
+        public async Task<User> Login(string login, string password)
         {
             try
             {
                 string passwordHash = HashPassword(password);
 
-                string url = $"http://courseworkformaui.somee.com/api/User/login/{email}/{passwordHash}";
+                string url = $"http://courseworkformaui.somee.com/api/User/login/{login}/{passwordHash}";
                 HttpResponseMessage response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
@@ -27,12 +27,12 @@ namespace MauiC_.Maui.Services
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Invalid email or password", "Ok");
+                    return null;
                 }
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", $"Failed to login: {ex.Message}", "Ok");
+                await Shell.Current.DisplayAlert("Ошибка", $"Ошибка авторизации", "ОК");
             }
 
             return null;

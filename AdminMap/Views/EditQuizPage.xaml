@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdminMap.Views.EditQuizPage"
+             Shell.NavBarIsVisible="False"
+             Background="#c5e079"
+             Title="Редактировать Тест">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Редактирование Теста"
+                   FontSize="24"
+                   TextColor="{StaticResource SecondaryGreen}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Frame Style="{StaticResource StyledFrame}">
+                <Entry Placeholder="Введите название теста"
+                       x:Name="QuizNameEntry"
+                       HorizontalOptions="FillAndExpand"
+                       Style="{StaticResource StyledEntry}" />
+            </Frame>
+
+            <Label x:Name="QuizNameErrorLabel"
+                   TextColor="{StaticResource PrimaryRed}"
+                   IsVisible="False"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <StackLayout x:Name="QuestionsStack" Spacing="20"/>
+
+            <Button Text="Добавить Вопрос"
+                    Style="{StaticResource PrimaryButton}"
+                    Clicked="OnAddQuestionClicked"
+                    HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Сохранить Тест"
+                    Style="{StaticResource PrimaryButton}"
+                    Clicked="OnSaveQuizClicked"
+                    HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

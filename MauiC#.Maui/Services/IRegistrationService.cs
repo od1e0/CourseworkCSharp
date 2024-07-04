@@ -10,5 +10,6 @@ namespace MauiC_.Maui.Services
     public interface IRegistrationService
     {
         Task<User> Register(string login, string email, string password, string fuulName, string photoPath);
+        Task<User> GetUserByName(string name);
     }
 }

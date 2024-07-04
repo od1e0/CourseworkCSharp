@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:AdminMap.Behaviors"
+             Shell.NavBarIsVisible="False"
+             Background="#c5e079"
+             x:Class="AdminMap.Views.AttractionDetailPage"
+             Title="AttractionDetailPage">
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Entry x:Name="LabelEntry" Placeholder="Название" Style="{StaticResource StyledEntry}" />
+            <Entry x:Name="AddressEntry" Placeholder="Адрес" Style="{StaticResource StyledEntry}" />
+            <Entry x:Name="LatitudeEntry" Placeholder="Широта" Keyboard="Numeric" Style="{StaticResource StyledEntry}" />
+            <Entry x:Name="LongitudeEntry" Placeholder="Долгота" Keyboard="Numeric" Style="{StaticResource StyledEntry}" />
+            <Editor x:Name="DescriptionEditor" Placeholder="Описание" Style="{StaticResource StyledEditor}">
+                <Editor.Behaviors>
+                    <behaviors:AutoResizeEditorBehavior/>
+                </Editor.Behaviors>
+            </Editor>
+            <Entry x:Name="ImageUrlEntry" Placeholder="URL изображения" Style="{StaticResource StyledEntry}" />
+            <Entry x:Name="ThreeModelUrlEntry" Placeholder="URL 3D модели" Style="{StaticResource StyledEntry}" />
+            
+            <Label x:Name="ErrorLabel"
+                   TextColor="{StaticResource PrimaryRed}"
+                   IsVisible="False"
+                   FontAttributes="Bold" />
+            
+            <Button Text="Сохранить" Style="{StaticResource PrimaryButton}" Clicked="OnSaveClicked" />
+            <Button Text="Удалить" Style="{StaticResource DeleteButton}" Clicked="OnDeleteClicked" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

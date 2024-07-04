@@ -31,7 +31,7 @@
                         </Frame.GestureRecognizers>
                         <Image Source="back.svg" WidthRequest="35"/>
                     </Frame>
-                    <Border Grid.Column="1"
+                    <!--<Border Grid.Column="1"
                         Margin="0,35,15,0"
                         BackgroundColor="{StaticResource DarkGrey}"
                         HeightRequest="50"
@@ -42,7 +42,7 @@
                             <RoundRectangle CornerRadius="10,10,10,10"/>
                         </Border.StrokeShape>
                         <Image Source="favorite.svg" WidthRequest="25"/>
-                    </Border>
+                    </Border>-->
                 </Grid>
             </Grid>
         </Border>
@@ -84,38 +84,34 @@
                        VerticalOptions="Center"/>
                 </HorizontalStackLayout>
             </Grid>
-
         </Border>
 
-        <Grid Grid.Row="3" RowDefinitions=".4*,.4*,.2*">
-            <VerticalStackLayout Margin="0,20,0,0"
-                             Spacing="10">
-                <Label FontFamily="RubikRegular"
-                   FontSize="16"
-                   Text="Описание"
-                   TextColor="#D9DADA"/>
-                <Label FontSize="14"
-                   LineHeight="1.3" x:Name="DescriptionAttraction">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span FontFamily="RubikLight"
-                              Text=""
-                              TextColor="{StaticResource LightGray}"/>
-                            <Span FontFamily="RubikLight"
-                              Text=" ... Read More"
-                              TextColor="{StaticResource Brown}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </VerticalStackLayout>
-            <Button Grid.Row="2"
+        <ScrollView Grid.Row="3" x:Name="DescriptionScrollView" Scrolled="OnDescriptionScrollViewScrolled">
+            <Grid Grid.Row="3" RowDefinitions=".4*,.4*,.2*">
+                <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
+                    <Label FontFamily="RubikRegular" FontSize="16" Text="История" TextColor="#D9DADA"/>
+                    <Label FontSize="14" LineHeight="1.3" x:Name="DescriptionAttraction">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontFamily="RubikLight" Text="" TextColor="{StaticResource LightGray}"/>
+                                <Span FontFamily="RubikLight" Text=" ... Read More" TextColor="{StaticResource Brown}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <Button Grid.Row="3"
+                x:Name="View3DButton"
+                VerticalOptions="End"
                 BackgroundColor="{StaticResource Brown}"
+                TextColor="White"
                 FontFamily="RubikRegular"
+                HeightRequest="50"
                 Text="Посмотреть 3D модель"
                 Clicked="Button_Clicked"/>
-        </Grid>
 
-    <Frame x:Name="AchievementNotification"
+        <Frame x:Name="AchievementNotification"
                BackgroundColor="White"
                CornerRadius="20"
                WidthRequest="140"

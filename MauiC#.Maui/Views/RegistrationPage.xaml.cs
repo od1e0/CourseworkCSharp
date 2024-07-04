@@ -15,6 +15,10 @@ public partial class RegistrationPage : ContentPage
         InitializeComponent();
     }
 
+    private async void LoginButton_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginPage");
+    }
 }
 
 

@@ -8,6 +8,9 @@ using System.Timers;
 using System.Xml.Linq;
 using Microsoft.Maui.Storage;
 using MauiC_.Maui.Models;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace MauiC_.Maui.Views
 {
@@ -16,58 +19,64 @@ namespace MauiC_.Maui.Views
         private List<Question> _questions;
         private int _currentQuestionIndex = 0;
         private System.Timers.Timer _timer;
-        private int _timeLeft; 
+        private static readonly HttpClient _httpClient = new HttpClient();
+        private int _timeLeft;
+        private double _correctAnswersCount = 0; 
         private DateTime _nextUpdate;
         private bool _quizCompletedToday;
 
         public QuizPage()
         {
             InitializeComponent();
-            LoadRandomQuiz();
+            LoadRandomQuizFromServer();
             LoadQuizState();
             CalculateTimeToNextUpdate();
             UpdateStartButton();
         }
 
-        private void LoadRandomQuiz()
+        private async void LoadRandomQuizFromServer()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceNames = assembly.GetManifestResourceNames()
-                                        .Where(r => r.EndsWith(".xml") && r.Contains("Resources.Quiz"))
-                                        .ToList();
-
-            if (resourceNames.Count == 0)
+            try
             {
-                DisplayAlert("Ошибка", "Не удалось найти файлы викторин.", "OK");
-                return;
-            }
-
-            var random = new Random();
-            var randomQuizResource = resourceNames[random.Next(resourceNames.Count)];
-
-            using (var stream = assembly.GetManifestResourceStream(randomQuizResource))
-            {
-                var doc = XDocument.Load(stream);
-                _questions = new List<Question>();
-
-                foreach (var q in doc.Descendants("Question"))
+                using (var client = new HttpClient())
                 {
-                    var questionText = q.Element("Text")?.Value;
-                    var options = new List<Option>();
+                    var response = await client.GetAsync("http://courseworkformaui.somee.com/api/quiz/random");
+                    response.EnsureSuccessStatusCode();
 
-                    foreach (var o in q.Descendants("Option"))
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    JObject jsonResponse = JObject.Parse(responseContent);
+                    string xmlContent = jsonResponse["content"].ToString();
+
+                    xmlContent = xmlContent.Trim();
+
+                    var doc = XDocument.Parse(xmlContent);
+                    _questions = new List<Question>();
+
+                    foreach (var q in doc.Descendants("Question"))
                     {
-                        options.Add(new Option
+                        var questionText = q.Element("Text")?.Value;
+                        var options = new List<Option>();
+
+                        foreach (var o in q.Element("Options").Descendants("Option"))
                         {
-                            Text = o.Value,
-                            IsCorrect = bool.Parse(o.Attribute("Correct").Value)
-                        });
+                            options.Add(new Option
+                            {
+                                Text = o.Value,
+                                IsCorrect = bool.Parse(o.Attribute("Correct").Value)
+                            });
+                        }
+
+                        _questions.Add(new Question { Text = questionText, Options = options });
                     }
 
-                    _questions.Add(new Question { Text = questionText, Options = options });
+                    _questions = _questions.OrderBy(x => Guid.NewGuid()).ToList();
                 }
             }
-            _questions = _questions.OrderBy(x => random.Next()).ToList();
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Произошла ошибка при загрузке викторины: {ex.Message}", "OK");
+            }
         }
 
         private void LoadQuizState()
@@ -75,7 +84,6 @@ namespace MauiC_.Maui.Views
             var lastCompletedDate = Preferences.Get("LastCompletedDate", DateTime.MinValue);
             _quizCompletedToday = lastCompletedDate.Date == DateTime.Now.Date;
         }
-
 
         private void SaveQuizState()
         {
@@ -96,7 +104,7 @@ namespace MauiC_.Maui.Views
         {
             if (_quizCompletedToday)
             {
-                _timer = new System.Timers.Timer(1000); 
+                _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed += OnTimerElapsed;
                 _timer.Start();
             }
@@ -105,7 +113,6 @@ namespace MauiC_.Maui.Views
                 StartButton.Text = "Начать викторину!";
             }
         }
-
 
         private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -146,15 +153,17 @@ namespace MauiC_.Maui.Views
             DisplayCurrentQuestion();
         }
 
-        private void DisplayCurrentQuestion()
+        private async void DisplayCurrentQuestion()
         {
             if (_questions == null || _questions.Count == 0)
                 return;
 
             if (_currentQuestionIndex >= _questions.Count)
             {
-                DisplayAlert("Поздравляем!", "Вы прошли все вопросы викторины.", "OK");
+                DisplayAlert("Поздравляем!", $"Вы прошли все вопросы викторины.\nПравильных ответов: {_correctAnswersCount} из {_questions.Count}.", "OK");
                 SaveQuizState();
+                await UpdateUserProgressOnServer(App.user.UserId, _correctAnswersCount);
+                _correctAnswersCount = 0; 
                 WelcomeLabel.IsVisible = true;
                 StartButton.IsVisible = true;
                 image.IsVisible = true;
@@ -180,6 +189,17 @@ namespace MauiC_.Maui.Views
             OptionsLayout.IsVisible = true;
         }
 
+        private async Task UpdateUserProgressOnServer(int userId, double progress)
+        {
+            string url = $"http://courseworkformaui.somee.com/api/User/{userId}/addLevelProgress/{progress}";
+            var response = await _httpClient.PutAsync(url, null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.Write("Failed to update view count on the server.");
+            }
+        }
+
         private void OnOptionClicked(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -193,11 +213,16 @@ namespace MauiC_.Maui.Views
                 button.BackgroundColor = isCorrect ? Color.FromHex("#008000") : Color.FromHex("#FF0000");
                 button.TextColor = Color.FromHex("#FFFFFF");
 
+                if (isCorrect)
+                {
+                    _correctAnswersCount++;
+                }
+
                 Device.StartTimer(TimeSpan.FromSeconds(0.3), () =>
                 {
                     _currentQuestionIndex++;
                     DisplayCurrentQuestion();
-                    return false; 
+                    return false;
                 });
             }
         }

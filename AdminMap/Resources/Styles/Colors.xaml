@@ -8,7 +8,8 @@
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Black1">Black</Color>
+    <Color x:Key="Black">#4CAF50</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
@@ -40,5 +41,12 @@
     <Color x:Key="Blue100Accent">#3E8EED</Color>
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
+    <Color x:Key="PrimaryRed">#D32F2F</Color>
+    <Color x:Key="PrimaryGreen">#388E3C</Color>
+    <Color x:Key="SecondaryRed">#F44336</Color>
+    <Color x:Key="TertiaryRed">#FFCDD2</Color>
+    <Color x:Key="SecondaryGreen">#4CAF50</Color>
+    <Color x:Key="TertiaryGreen">#C8E6C9</Color>
+    <Color x:Key="LightGreen">#E8F5E9</Color>
 
 </ResourceDictionary>
